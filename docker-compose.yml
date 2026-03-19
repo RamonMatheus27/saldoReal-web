@@ -10,4 +10,11 @@ services:
     ports:
       # Porta 80 do host já está sendo usada pelo nginx (api) — evitamos conflito
       - "8081:80"
+    networks:
+      - saldoreal
     restart: unless-stopped
+
+networks:
+  saldoreal:
+    name: saldoreal
+    driver: bridge
