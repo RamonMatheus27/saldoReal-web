@@ -1,1 +1,397 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap');
+
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
+
+/* ============================================================ */
+/* BASE                                                         */
+/* ============================================================ */
+html, body {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================ */
+/* KEYFRAMES                                                    */
+/* ============================================================ */
+@keyframes wordEnter {
+  0%   { opacity: 0; transform: translateY(28px); }
+  55%  { opacity: 1; transform: translateY(-5px); }
+  75%  { transform: translateY(2px); }
+  88%  { transform: translateY(-1px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wordExit {
+  0%   { opacity: 1; transform: translateY(0) scaleY(1); }
+  30%  { opacity: 0.5; transform: translateY(-10px) scaleY(0.95); }
+  100% { opacity: 0; transform: translateY(-24px) scaleY(0.9); }
+}
+
+@keyframes fadeInUp {
+  0%   { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  0%   { opacity: 0; transform: translateX(-24px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  0%   { opacity: 0; transform: translateX(24px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes msgReveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================ */
+/* HERO                                                         */
+/* ============================================================ */
+.hero-section {
+  background-color: #060f0a;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px),
+    radial-gradient(ellipse at 15% 60%, rgba(0, 204, 106, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(7, 102, 75, 0.18) 0%, transparent 45%),
+    linear-gradient(160deg, #060f0a 0%, #0a1a12 60%, #060f0a 100%);
+  background-size: 28px 28px, auto, auto, auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================ */
+/* HERO — PALAVRA ANIMADA                                       */
+/* ============================================================ */
+.hero-word-container {
+  display: block;
+  overflow: hidden;
+  height: clamp(3.6rem, 7.5vw, 5.6rem);
+  position: relative;
+}
+
+.hero-animated-word {
+  display: block;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #00cc6a;
+  position: absolute;
+  inset: 0;
+  animation: wordEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-animated-word.word-exit {
+  animation: wordExit 0.32s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+/* ============================================================ */
+/* BOTÕES                                                       */
+/* ============================================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #00cc6a;
+  color: #030a06;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  padding: 14px 24px;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: #00e876;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(0, 204, 106, 0.3);
+}
+
+.btn-primary-sm {
+  display: inline-flex;
+  align-items: center;
+  background: #07664b;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn-primary-sm:hover {
+  background: #0a8a63;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.04);
+}
+
+.btn-pricing-cta {
+  display: block;
+  text-align: center;
+  background: #00cc6a;
+  color: #030a06;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 16px 24px;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn-pricing-cta:hover {
+  background: #00e876;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(0, 204, 106, 0.35);
+}
+
+/* ============================================================ */
+/* PHONE MOCKUP                                                 */
+/* ============================================================ */
+.phone-mockup {
+  animation: fadeInRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+
+.phone-frame {
+  width: 300px;
+  height: 580px;
+  background: #1a1a1a;
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 25px 80px rgba(0,0,0,0.7),
+    inset 0 0 0 2px rgba(255,255,255,0.04);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.phone-notch {
+  width: 90px;
+  height: 22px;
+  background: #1a1a1a;
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto 4px;
+  position: relative;
+  z-index: 10;
+}
+
+.wa-chat-screen {
+  background: #f0f0f0;
+  border-radius: 30px;
+  height: calc(100% - 26px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wa-chat-header {
+  background: #07664b;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.wa-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.wa-info .wa-name {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  display: block;
+  line-height: 1.2;
+}
+
+.wa-info .wa-status {
+  color: rgba(255,255,255,0.65);
+  font-size: 10px;
+  display: block;
+}
+
+.wa-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: #e5ddd5;
+  scrollbar-width: none;
+}
+
+.wa-messages::-webkit-scrollbar { display: none; }
+
+.wa-bubble {
+  max-width: 84%;
+  padding: 7px 10px 5px;
+  border-radius: 10px;
+  font-size: 11px;
+  line-height: 1.45;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  word-break: break-word;
+}
+
+.wa-bubble.bot {
+  background: #ffffff;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+
+.wa-bubble.user {
+  background: #d1f4c9;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.wa-time {
+  font-size: 9px;
+  color: rgba(0,0,0,0.35);
+  margin-top: 2px;
+  text-align: right;
+}
+
+/* Animações das mensagens */
+.wa-msg-bot, .wa-msg-user {
+  opacity: 0;
+  animation: msgReveal 0.4s ease forwards;
+}
+.d1 { animation-delay: 0.4s; }
+.d2 { animation-delay: 0.9s; }
+.d3 { animation-delay: 1.3s; }
+.d4 { animation-delay: 1.8s; }
+.d5 { animation-delay: 2.2s; }
+.d6 { animation-delay: 2.7s; }
+.d7 { animation-delay: 3.1s; }
+
+/* ============================================================ */
+/* STEP NUMBER                                                  */
+/* ============================================================ */
+.step-number-new {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #07664b;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================ */
+/* CHAT BUBBLES (seção como funciona)                          */
+/* ============================================================ */
+.chat-user-bubble {
+  display: inline-block;
+  background: #d1f4c9;
+  border-radius: 10px 10px 2px 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #1a2e25;
+  line-height: 1.4;
+}
+
+.chat-bot-bubble {
+  display: inline-block;
+  background: white;
+  border-radius: 10px 10px 10px 2px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #1a2e25;
+  line-height: 1.5;
+}
+
+/* ============================================================ */
+/* PRICING CARD                                                 */
+/* ============================================================ */
+.pricing-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ============================================================ */
+/* SCROLL ANIMATIONS                                           */
+/* ============================================================ */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll.delay-1 { transition-delay: 0.08s; }
+.animate-on-scroll.delay-2 { transition-delay: 0.16s; }
+.animate-on-scroll.delay-3 { transition-delay: 0.24s; }
+.animate-on-scroll.delay-4 { transition-delay: 0.32s; }
+.animate-on-scroll.delay-5 { transition-delay: 0.40s; }
+.animate-on-scroll.delay-6 { transition-delay: 0.48s; }
+
+/* ============================================================ */
+/* HERO ENTRADA                                                 */
+/* ============================================================ */
+.hero-section h1,
+.hero-section p,
+.hero-section .inline-flex:first-child,
+.hero-section .flex.flex-col.sm\:flex-row,
+.hero-section .flex.items-center.gap-5 {
+  animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-section .inline-flex:first-child  { animation-delay: 0.05s; }
+.hero-section h1:first-of-type          { animation-delay: 0.12s; }
+.hero-word-container                    { animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both; }
+.hero-section h1:last-of-type           { animation-delay: 0.22s; }
+.hero-section p                         { animation-delay: 0.30s; }
+.hero-section .flex.flex-col.sm\:flex-row { animation-delay: 0.38s; }
+.hero-section .flex.items-center.gap-5  { animation-delay: 0.46s; }

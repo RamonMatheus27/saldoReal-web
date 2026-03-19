@@ -1,0 +1,6 @@
+/* Estilos específicos do componente landing */
+/* A maior parte dos estilos está em src/styles.css (globais) */
+
+:host {
+  display: block;
+}
