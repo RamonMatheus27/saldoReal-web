@@ -1,0 +1,12 @@
+services:
+  web:
+    image: ${WEB_IMAGE:-saldoreal-web:latest}
+    container_name: saldoreal_web
+    build:
+      context: .
+      args:
+        WHATSAPP_BOT_NUMBER: ${WHATSAPP_BOT_NUMBER}
+        WHATSAPP_SUPPORT_NUMBER: ${WHATSAPP_SUPPORT_NUMBER}
+    ports:
+      - "80:80"
+    restart: unless-stopped

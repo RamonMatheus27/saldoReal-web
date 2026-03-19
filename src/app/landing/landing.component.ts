@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-landing',
@@ -19,7 +20,10 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   private rotateInterval?: ReturnType<typeof setInterval>;
 
   readonly whatsappUrl =
-    'https://wa.me/5500000000000?text=Oi!%20Quero%20testar%20o%20SaldoReal%20gr%C3%A1tis';
+    `https://wa.me/${environment.whatsappBotNumber}?text=Oi!%20Quero%20testar%20o%20SaldoReal%20gr%C3%A1tis`;
+
+  readonly whatsappSupportUrl =
+    `https://wa.me/${environment.whatsappSupportNumber}?text=Oi!%20Preciso%20de%20ajuda%20com%20o%20SaldoReal`;
 
   get currentWord(): string {
     return this.rotatingWords[this.currentWordIndex];
