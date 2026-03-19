@@ -87,7 +87,7 @@ jobs:
 
           # Pull da nova imagem e (re)sobe o container
           docker compose pull web
-          docker compose up -d web --remove-orphans
+          docker compose up -d --no-build web --remove-orphans
 
           # Remove imagens antigas para liberar espaço em disco
           docker image prune -f

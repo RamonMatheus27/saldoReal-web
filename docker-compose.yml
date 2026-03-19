@@ -8,5 +8,6 @@ services:
         WHATSAPP_BOT_NUMBER: ${WHATSAPP_BOT_NUMBER}
         WHATSAPP_SUPPORT_NUMBER: ${WHATSAPP_SUPPORT_NUMBER}
     ports:
-      - "80:80"
+      # Porta 80 do host já está sendo usada pelo nginx (api) — evitamos conflito
+      - "8081:80"
     restart: unless-stopped
