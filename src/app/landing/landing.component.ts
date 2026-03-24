@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, NgZone, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment';
 
@@ -11,6 +11,7 @@ import { environment } from '../../environments/environment';
 })
 export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   private el = inject(ElementRef);
+  private zone = inject(NgZone);
 
   rotatingWords = ['fiados', 'vendas', 'gastos', 'lucros', 'estoque'];
   currentWordIndex = 0;
@@ -18,6 +19,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   currentYear = new Date().getFullYear();
 
   private rotateInterval?: ReturnType<typeof setInterval>;
+  private testimonialsInterval?: ReturnType<typeof setInterval>;
 
   readonly whatsappUrl =
     `https://wa.me/${environment.whatsappBotNumber}?text=Oi!%20Quero%20testar%20o%20SaldoReal%20gr%C3%A1tis`;
@@ -29,14 +31,50 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.rotatingWords[this.currentWordIndex];
   }
 
+  testimonialIndex = 0;
+
+  testimonials = [
+    {
+      quote: 'Em duas semanas já senti diferença no caixa. Passei a controlar melhor vendas, gastos e fiados.',
+      name: 'Bruna T.',
+      role: 'Revendedora boticário',
+    },
+    {
+      quote: 'Antes eu esquecia quem me devia. Agora o Saldo Real me lembra certinho e eu recebo muito mais no fim do mês.',
+      name: 'Juliana M.',
+      role: 'Revendedora de cosméticos',
+    },
+    {
+      quote: 'Eu só mando áudio no WhatsApp e ele organiza tudo. Finalmente sei meu lucro de verdade.',
+      name: 'Carla S.',
+      role: 'Revendedora autônoma',
+    },
+    {
+      quote: 'Com os lembretes automáticos, parei de perder prazo e de pagar conta com multa.',
+      name: 'Patrícia R.',
+      role: 'Revendedora Natura',
+    },
+    {
+      quote: 'O melhor foi sair das planilhas. Está tudo no WhatsApp, simples e rápido de usar no dia a dia.',
+      name: 'Fernanda L.',
+      role: 'Revendedora Avon',
+    },
+  ];
+
   ngOnInit(): void {
-    this.rotateInterval = setInterval(() => {
-      this.isAnimatingOut = true;
-      setTimeout(() => {
-        this.currentWordIndex = (this.currentWordIndex + 1) % this.rotatingWords.length;
-        this.isAnimatingOut = false;
-      }, 320);
-    }, 2500);
+    this.zone.run(() => {
+      this.rotateInterval = setInterval(() => {
+        this.isAnimatingOut = true;
+        setTimeout(() => {
+          this.currentWordIndex = (this.currentWordIndex + 1) % this.rotatingWords.length;
+          this.isAnimatingOut = false;
+        }, 320);
+      }, 2500);
+
+      this.testimonialsInterval = setInterval(() => {
+        this.testimonialIndex = (this.testimonialIndex + 1) % this.testimonials.length;
+      }, 4500);
+    });
   }
 
   ngAfterViewInit(): void {
@@ -46,6 +84,9 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     if (this.rotateInterval) {
       clearInterval(this.rotateInterval);
+    }
+    if (this.testimonialsInterval) {
+      clearInterval(this.testimonialsInterval);
     }
   }
 
@@ -68,6 +109,19 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
   scrollTo(sectionId: string): void {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  nextTestimonial(): void {
+    this.testimonialIndex = (this.testimonialIndex + 1) % this.testimonials.length;
+  }
+
+  prevTestimonial(): void {
+    this.testimonialIndex =
+      (this.testimonialIndex - 1 + this.testimonials.length) % this.testimonials.length;
+  }
+
+  goToTestimonial(index: number): void {
+    this.testimonialIndex = index;
   }
 
   problems = [

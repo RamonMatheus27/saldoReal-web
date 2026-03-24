@@ -306,6 +306,58 @@
 </section>
 
 <!-- ============================================================ -->
+<!-- PROVA SOCIAL                                                 -->
+<!-- ============================================================ -->
+<section id="prova-social" class="bg-[#f4faf7] py-24 lg:py-32">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+    <div class="text-center mb-12 animate-on-scroll">
+      <p class="text-[#07664b] text-sm font-semibold tracking-widest uppercase mb-4">Prova social</p>
+      <h2 class="text-4xl lg:text-5xl font-black text-[#0a1a12] leading-tight">
+        Quem usa, recomenda
+      </h2>
+    </div>
+
+    <div class="animate-on-scroll">
+      <div class="relative overflow-hidden rounded-3xl border border-[#07664b]/10 bg-white shadow-sm">
+        <div
+          class="flex transition-transform duration-500 ease-out"
+          [style.transform]="'translateX(-' + testimonialIndex * 100 + '%)'"
+        >
+          @for (item of testimonials; track item.name) {
+            <article class="min-w-full p-8 sm:p-10 lg:p-12">
+              <div class="flex items-center gap-1 text-[#00a856] mb-5" aria-hidden="true">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <blockquote class="text-[#0a1a12] text-lg sm:text-xl leading-relaxed font-medium mb-8">
+                "{{ item.quote }}"
+              </blockquote>
+              <div class="border-t border-gray-100 pt-5">
+                <p class="text-[#0a1a12] font-bold">{{ item.name }}</p>
+                <p class="text-gray-500 text-sm">{{ item.role }}</p>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center mt-7">
+        <div class="flex items-center gap-2.5">
+          @for (item of testimonials; track item.name; let i = $index) {
+            <button
+              type="button"
+              (click)="goToTestimonial(i)"
+              class="h-2.5 rounded-full transition-all"
+              [ngClass]="testimonialIndex === i ? 'w-7 bg-[#07664b]' : 'w-2.5 bg-[#07664b]/30'"
+              aria-label="Ir para depoimento {{ i + 1 }}"
+            ></button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
 <!-- PRECO                                                        -->
 <!-- ============================================================ -->
 <section id="preco" class="bg-[#060f0a] py-24 lg:py-32">
