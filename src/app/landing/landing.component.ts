@@ -111,6 +111,30 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  trackCtaClick(label: string = 'botao_testar_gratis'): void {
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', 'click_cta', {
+        event_category: 'conversao',
+        event_label: label,
+      });
+    }
+    if (typeof (window as any).ttq !== 'undefined') {
+      (window as any).ttq.track('ClickButton', { content_name: label });
+    }
+  }
+
+  trackWhatsAppClick(label: string = 'abriu_whatsapp'): void {
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', 'click_whatsapp', {
+        event_category: 'conversao',
+        event_label: label,
+      });
+    }
+    if (typeof (window as any).ttq !== 'undefined') {
+      (window as any).ttq.track('Contact', { content_name: label });
+    }
+  }
+
   nextTestimonial(): void {
     this.testimonialIndex = (this.testimonialIndex + 1) % this.testimonials.length;
   }
